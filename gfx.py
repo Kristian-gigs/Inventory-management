@@ -10,12 +10,12 @@ class Graphics:
         self.query_frame = tk.Frame(self.wnd)
         self.query_frame.grid()
         self.search_field = tk.Entry(self.query_frame, text="Item")
-        self.search_field.grid(row=1, column=1)
+        self.search_field.grid(row=1, column=2)
         self.item_count_field = tk.Entry(self.query_frame, textvariable=self.item_count)
         self.item_count_field.grid(row=1, column=2)
-        self.search_field.grid(row=1, column=1)
+        self.search_field.grid(row=1, column=2)
         self.search_button = tk.Button(self.query_frame, text="Search")
-        self.search_button.grid(row=2, column=1)
+        self.search_button.grid(row=2, column=2)
         self.add_button = tk.Button(self.query_frame, text="Add", command=self.add_item_win)
         self.add_button.grid(row=2, column=2)
 
@@ -27,16 +27,34 @@ class Graphics:
         self.item_number = tk.Entry(self.item_win)
         self.item_category = tk.Entry(self.item_win)
         self.item_quantity = tk.Entry(self.item_win)
+        self.item_location = tk.Entry(self.item_win)
+
+        self.item_name_descriptor = tk.Label(self.item_win,text="Name: ")
+        self.item_number_descriptor = tk.Label(self.item_win, text="Item#")
+        self.item_category_descriptor = tk.Label(self.item_win, text="Cat: ")
+        self.item_quantity_descriptor = tk.Label(self.item_win, text="Qty: ")
+        self.item_location_descriptor = tk.Label(self.item_win, text="Loc:")
         self.add_buttton = tk.Button(self.item_win)
 
-        self.item_name.grid()
-        self.item_name.grid()
-        self.item_name.grid()
-        self.item_name.grid()
+        self.item_name.grid(column=2, row=1)
+        self.item_number.grid(column=2, row=2)
+        self.item_category.grid(column=2, row=3)
+        self.item_quantity.grid(column=2, row=4)
+        self.add_button.grid(column=2, row=5)
 
+        self.item_name_descriptor.grid(column=1, row=1)
+        self.item_number_descriptor.grid(column=1, row=2)
+        self.item_category_descriptor.grid(column=1, row=3)
+        self.item_quantity_descriptor.grid(column=1, row=4)
+        self.item_location_descriptor.grid(column=1, row=5)
+        self.item_win.mainloop()
+    
+    def search_item(self):
+        pass
+    
     def update_table(self):
         pass
-
+    
     def clear_table(self):
         pass
 
