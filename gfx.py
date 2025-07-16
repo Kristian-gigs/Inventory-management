@@ -20,7 +20,21 @@ class Graphics:
         self.add_button.grid(row=2, column=2)
 
         self.wnd.mainloop()
-    
+
+    def add_item_win(self):
+        self.item_win = tk.Tk()
+        self.item_win.mainloop()
+        self.item_name = tk.Entry(self.item_win)
+        self.item_number = tk.Entry(self.item_win)
+        self.item_category = tk.Entry(self.item_win)
+        self.item_quantity = tk.Entry(self.item_win)
+        self.add_buttton = tk.Button(self.item_win)
+        
+        self.item_name.grid()
+        self.item_name.grid()
+        self.item_name.grid()
+        self.item_name.grid()
+
     def update_table(self):
         pass
 
