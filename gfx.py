@@ -22,19 +22,26 @@ class Graphics:
         self.wnd.mainloop()
 
     def add_item_btn_cmd(self):
+        self.item_name_entry = tk.StringVar()
+        self.item_number_entry = tk.StringVar()
+        self.item_category_entry = tk.StringVar()
+        self.item_quantity_entry = tk.StringVar()
+        self.item_location_entry = tk.StringVar()
+
         self.item_win = tk.Tk()
-        self.item_name = tk.Entry(self.item_win)
-        self.item_number = tk.Entry(self.item_win)
-        self.item_category = tk.Entry(self.item_win)
-        self.item_quantity = tk.Entry(self.item_win)
-        self.item_location = tk.Entry(self.item_win)
+        self.item_name = tk.Entry(self.item_win, textvariable=self.item_name_entry)
+        self.item_number = tk.Entry(self.item_win, textvariable=self.item_number_entry)
+        self.item_category = tk.Entry(self.item_win, textvariable=self.item_category_entry)
+        self.item_quantity = tk.Entry(self.item_win, textvariable=self.item_quantity_entry)
+        self.item_location = tk.Entry(self.item_win, textvariable=self.item_location_entry)
+
 
         self.item_name_descriptor = tk.Label(self.item_win,text="Name: ")
         self.item_number_descriptor = tk.Label(self.item_win, text="Item#")
         self.item_category_descriptor = tk.Label(self.item_win, text="Cat: ")
         self.item_quantity_descriptor = tk.Label(self.item_win, text="Qty: ")
         self.item_location_descriptor = tk.Label(self.item_win, text="Loc:")
-        self.add_buttton = tk.Button(self.item_win)
+        self.add_button = tk.Button(self.item_win, text="Add item", command=db.Database.add_item)
 
         self.item_name.grid(column=2, row=1)
         self.item_number.grid(column=2, row=2)
@@ -49,14 +56,22 @@ class Graphics:
         self.item_quantity_descriptor.grid(column=1, row=4)
         self.item_location_descriptor.grid(column=1, row=5)
         self.item_win.mainloop()
+
     
     def search_btn_cmd(self):
+        self.item_name_entry = tk.StringVar()
+        self.item_number_entry = tk.StringVar()
+        self.item_category_entry = tk.StringVar()
+        self.item_quantity_entry = tk.StringVar()
+        self.item_location_entry = tk.StringVar()
+
         self.item_win = tk.Tk()
-        self.item_name = tk.Entry(self.item_win)
-        self.item_number = tk.Entry(self.item_win)
-        self.item_category = tk.Entry(self.item_win)
-        self.item_quantity = tk.Entry(self.item_win)
-        self.item_location = tk.Entry(self.item_win)
+        self.item_name = tk.Entry(self.item_win, textvariable=self.item_name_entry)
+        self.item_number = tk.Entry(self.item_win, textvariable=self.item_number_entry)
+        self.item_category = tk.Entry(self.item_win, textvariable=self.item_category_entry)
+        self.item_quantity = tk.Entry(self.item_win, textvariable=self.item_quantity_entry)
+        self.item_location = tk.Entry(self.item_win, textvariable=self.item_location_entry)
+
 
         self.item_name_descriptor = tk.Label(self.item_win,text="Name: ")
         self.item_number_descriptor = tk.Label(self.item_win, text="Item#")
@@ -78,6 +93,8 @@ class Graphics:
         self.item_quantity_descriptor.grid(column=1, row=4)
         self.item_location_descriptor.grid(column=1, row=5)
         self.item_win.mainloop()
+
+        
 
     def update_table(self):
         pass
