@@ -7,11 +7,11 @@ class Database:
         try:
             self.inv = open(db_source, newline=" ")
         except:
-            gfx_error_handle("Invalid db_source")
+            gfx_error_handle()
     
     def add_item(self, item_name, count):
         open_db = csv.writer(self.inv)
         open_db.writerow(item_name, count)
     
     def get_item(self, item_name):
-        return self.item
+        return item_name

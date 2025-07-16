@@ -1,4 +1,8 @@
 import database
 import gfx
-db = database.Database("db/inventory.csv", gfx.Graphics.error_handle)
-wnd = gfx.Graphics()
+
+def temp_error_handle():
+    print("Error occured")
+
+db = database.Database("db/inventory.csv", temp_error_handle)
+wnd = gfx.Graphics(db)

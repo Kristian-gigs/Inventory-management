@@ -2,7 +2,7 @@ import tkinter as tk
 
 class Graphics:
     def __init__(self, db):
-        self.item_count = db.get_item()
+        self.item_count = 0
         self.wnd = tk.Tk()
         self.wnd.title("Inventory management")
         self.main_menu = tk.Menu(self.wnd)
@@ -16,14 +16,13 @@ class Graphics:
         self.search_field.grid(row=1, column=1)
         self.search_button = tk.Button(self.query_frame, text="Search")
         self.search_button.grid(row=2, column=1)
-        self.add_button = tk.Button(self.query_frame, text="Add", function=self.add_item_win)
+        self.add_button = tk.Button(self.query_frame, text="Add", command=self.add_item_win)
         self.add_button.grid(row=2, column=2)
 
         self.wnd.mainloop()
 
     def add_item_win(self):
         self.item_win = tk.Tk()
-        self.item_win.mainloop()
         self.item_name = tk.Entry(self.item_win)
         self.item_number = tk.Entry(self.item_win)
         self.item_category = tk.Entry(self.item_win)
