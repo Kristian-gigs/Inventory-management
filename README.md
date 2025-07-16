@@ -1,2 +1,3 @@
-Inventory management system using a csv file saved locally to store items by name, item#, quantity and category. The code also has a GUI using tkinter which can be used to get queries from inventory based on category, item or item#.
-Items can also be added or removed, and the quantity of an item can be changed, incremented and decremented.
+This is an inventory management system using a local csv file as a database. The items are stored by item name, item#, category and quantity.
+Through the GUI you can view parts of the inventory based on queries for item name, item# or category, and new items can also be added
+through the GUI, as well as properties of an listed item, such as quantity can be updated
