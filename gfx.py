@@ -43,3 +43,6 @@ class Graphics:
 
     def send_query(self, gfx):
         pass
+    
+    def error_handle(self):
+        print("Error occured")
