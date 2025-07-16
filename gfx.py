@@ -40,7 +40,8 @@ class Graphics:
         self.item_number.grid(column=2, row=2)
         self.item_category.grid(column=2, row=3)
         self.item_quantity.grid(column=2, row=4)
-        self.add_button.grid(column=2, row=5)
+        self.item_location.grid(column=2, row=5)
+        self.add_button.grid(column=2, row=6)
 
         self.item_name_descriptor.grid(column=1, row=1)
         self.item_number_descriptor.grid(column=1, row=2)
@@ -62,13 +63,14 @@ class Graphics:
         self.item_category_descriptor = tk.Label(self.item_win, text="Cat: ")
         self.item_quantity_descriptor = tk.Label(self.item_win, text="Qty: ")
         self.item_location_descriptor = tk.Label(self.item_win, text="Loc:")
-        self.search_buttton = tk.Button(self.item_win, command=db.Database.search_query)
+        self.search_button = tk.Button(self.item_win, command=db.Database.search_query)
 
         self.item_name.grid(column=2, row=1)
         self.item_number.grid(column=2, row=2)
         self.item_category.grid(column=2, row=3)
         self.item_quantity.grid(column=2, row=4)
-        self.add_button.grid(column=2, row=5)
+        self.item_location.grid(column=2, row=5)
+        self.search_button.grid(column=2, row=6)
 
         self.item_name_descriptor.grid(column=1, row=1)
         self.item_number_descriptor.grid(column=1, row=2)
