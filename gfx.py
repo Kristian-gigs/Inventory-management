@@ -16,7 +16,7 @@ class Graphics:
         self.search_field.grid(row=1, column=1)
         self.search_button = tk.Button(self.query_frame, text="Search")
         self.search_button.grid(row=2, column=1)
-        self.add_button = tk.Button(self.query_frame, text="Add")
+        self.add_button = tk.Button(self.query_frame, text="Add", function=self.add_item_win)
         self.add_button.grid(row=2, column=2)
 
         self.wnd.mainloop()
@@ -29,7 +29,7 @@ class Graphics:
         self.item_category = tk.Entry(self.item_win)
         self.item_quantity = tk.Entry(self.item_win)
         self.add_buttton = tk.Button(self.item_win)
-        
+
         self.item_name.grid()
         self.item_name.grid()
         self.item_name.grid()
