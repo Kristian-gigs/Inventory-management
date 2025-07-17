@@ -77,7 +77,9 @@ class Graphics:
         self.item_category_descriptor = tk.Label(self.item_win, text="Cat: ")
         self.item_quantity_descriptor = tk.Label(self.item_win, text="Qty: ")
         self.item_location_descriptor = tk.Label(self.item_win, text="Loc:")
-        self.search_button = tk.Button(self.item_win, command=self.db.search_query)
+        self.search_button = tk.Button(self.item_win, command=lambda: self.db.search_query(self.item_name_entry.get(), self.item_number_entry.get(), self.item_category_entry.get(), self.item_quantity_entry.get(), self.item_location_entry.get()))
+        self.next_button = tk.Button(self.item_win, command=None, text=">")
+        self.prev_button = tk.Button(self.item_win, command=None, text="<")
 
         self.item_name.grid(column=2, row=1)
         self.item_number.grid(column=2, row=2)
