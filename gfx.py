@@ -41,7 +41,7 @@ class Graphics:
         self.item_category_descriptor = tk.Label(self.item_win, text="Cat: ")
         self.item_quantity_descriptor = tk.Label(self.item_win, text="Qty: ")
         self.item_location_descriptor = tk.Label(self.item_win, text="Loc:")
-        self.add_button = tk.Button(self.item_win, text="Add item", command=db.Database.add_item)
+        self.add_button = tk.Button(self.item_win, text="Add item", command=lambda: db.Database.add_item(self.item_name_entry, self.item_number_entry, self.item_category_entry, self.item_quantity_entry, self.item_location_entry))
 
         self.item_name.grid(column=2, row=1)
         self.item_number.grid(column=2, row=2)
