@@ -119,7 +119,7 @@ class Graphics:
 
         self.results = tk.Toplevel(self.item_win)
         self.results.title("Query results")
-        self.item_list_as_text = tk.Text(self.results, text=self.item_list)
+        self.item_list_as_text = tk.Label(self.results, text=self.item_list)
         
 
     def update_table(self):
