@@ -94,20 +94,22 @@ class Graphics:
         self.item_category_descriptor = tk.Label(self.item_win, text="Cat: ")
         self.item_quantity_descriptor = tk.Label(self.item_win, text="Qty: ")
         self.item_location_descriptor = tk.Label(self.item_win, text="Loc:")
-        self.search_button = tk.Button(self.item_win, text="Search", command=lambda: self.db.search_query(self.item_list, self.item_name_entry.get(), self.item_number_entry.get(), self.item_category_entry.get(), self.item_quantity_entry.get(), self.item_location_entry.get()))
-        self.next_button = tk.Button(self.item_win, command=None, text=">")
-        self.prev_button = tk.Button(self.item_win, command=None, text="<")
-        self.clear_button = tk.Button(self.item_win, text="Clear", command=clear)
+        self.button_bar = tk.Frame(self.item_win)
+        self.search_button = tk.Button(self.button_bar, text="Search", command=lambda: self.db.search_query(self.item_list, self.item_name_entry.get(), self.item_number_entry.get(), self.item_category_entry.get(), self.item_quantity_entry.get(), self.item_location_entry.get()))
+        self.next_button = tk.Button(self.button_bar, command=None, text=">")
+        self.prev_button = tk.Button(self.button_bar, command=None, text="<")
+        self.clear_button = tk.Button(self.button_bar, text="Clear", command=clear)
 
         self.item_name.grid(column=2, row=1)
         self.item_number.grid(column=2, row=2)
         self.item_category.grid(column=2, row=3)
         self.item_quantity.grid(column=2, row=4)
         self.item_location.grid(column=2, row=5)
-        self.search_button.grid(column=3, row=6)
-        self.prev_button.grid(column=2, row=6)
-        self.next_button.grid(column=4, row=6)
-        self.clear_button.grid(column=1, row=6)
+        self.button_bar.grid(row=6, column=1, columnspan=3)
+        self.search_button.pack(side="left")
+        self.prev_button.pack(side="left")
+        self.next_button.pack(side="left")
+        self.clear_button.pack(side="left")
 
         self.item_name_descriptor.grid(column=1, row=1)
         self.item_number_descriptor.grid(column=1, row=2)
@@ -115,6 +117,9 @@ class Graphics:
         self.item_quantity_descriptor.grid(column=1, row=4)
         self.item_location_descriptor.grid(column=1, row=5)
 
+        self.results = tk.Toplevel(self.item_win)
+        self.results.title("Query results")
+        self.item_list_as_text = tk.Text(self.results, text=self.item_list)
         
 
     def update_table(self):
