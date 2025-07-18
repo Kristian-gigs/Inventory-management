@@ -88,6 +88,12 @@ class Graphics:
         self.item_quantity = tk.Entry(self.item_win, textvariable=self.item_quantity_entry)
         self.item_location = tk.Entry(self.item_win, textvariable=self.item_location_entry)
 
+        def search():
+            self.db.search_query(self.item_list, self.item_name_entry.get(), self.item_number_entry.get(), self.item_category_entry.get(), self.item_quantity_entry.get(), self.item_location_entry.get())
+            self.results_win = tk.Toplevel(self.item_win)
+            self.results_var = tk.StringVar(self.results_win)
+            self.results_win.title("Query results")
+            self.results = tk.Label(self.results_win, textvariable=self.results_var)
 
         self.item_name_descriptor = tk.Label(self.item_win,text="Name: ")
         self.item_number_descriptor = tk.Label(self.item_win, text="Item#")
@@ -95,7 +101,7 @@ class Graphics:
         self.item_quantity_descriptor = tk.Label(self.item_win, text="Qty: ")
         self.item_location_descriptor = tk.Label(self.item_win, text="Loc:")
         self.button_bar = tk.Frame(self.item_win)
-        self.search_button = tk.Button(self.button_bar, text="Search", command=lambda: self.db.search_query(self.item_list, self.item_name_entry.get(), self.item_number_entry.get(), self.item_category_entry.get(), self.item_quantity_entry.get(), self.item_location_entry.get()))
+        self.search_button = tk.Button(self.button_bar, text="Search", command=search)
         self.next_button = tk.Button(self.button_bar, command=None, text=">")
         self.prev_button = tk.Button(self.button_bar, command=None, text="<")
         self.clear_button = tk.Button(self.button_bar, text="Clear", command=clear)
@@ -116,10 +122,6 @@ class Graphics:
         self.item_category_descriptor.grid(column=1, row=3)
         self.item_quantity_descriptor.grid(column=1, row=4)
         self.item_location_descriptor.grid(column=1, row=5)
-
-        self.results = tk.Toplevel(self.item_win)
-        self.results.title("Query results")
-        self.item_list_as_text = tk.Label(self.results, text=self.item_list)
         
 
     def update_table(self):
