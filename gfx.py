@@ -15,6 +15,8 @@ class Graphics:
         self.search_button.grid(row=2, column=1)
         self.add_button = tk.Button(self.query_frame, text="Add...", command=self.add_item_btn_cmd)
         self.add_button.grid(row=2, column=2)
+        self.credits_button = tk.Button(self.query_frame, command=self.credits, text="Credits")
+        self.credits_button.grid(row=3, column=1, columnspan=2, pady=30)
         self.db = database.Database(r"C:\Users\krist\Desktop\Programming Ideas\Inventory management\db\inventory.cvs")
 
         self.wnd.mainloop()
@@ -122,6 +124,12 @@ class Graphics:
         self.item_quantity_descriptor.grid(column=1, row=4)
         self.item_location_descriptor.grid(column=1, row=5)
         
+    def credits(self):
+        credits_wnd = tk.Toplevel(self.wnd)
+        credits_wnd.geometry("500x100")
+        credits_wnd.title("Credits")
+        credit_text = tk.Label(credits_wnd, text="This inventory management system was created by Kristian Gunnleiv i Gardastovu Sørensen\nIt aims to help one keep track of their inventory using a simple GUI,\n and was all in all just a fun little project\n\n Github: @Kristian-gigs\n Check out other things I have made!")
+        credit_text.pack()
 
     def update_table(self):
         pass
