@@ -89,11 +89,11 @@ class Graphics:
         self.item_location = tk.Entry(self.item_win, textvariable=self.item_location_entry)
 
         def search():
-            self.db.search_query(self.item_list, self.item_name_entry.get(), self.item_number_entry.get(), self.item_category_entry.get(), self.item_quantity_entry.get(), self.item_location_entry.get())
-            self.results_win = tk.Toplevel(self.item_win)
-            self.results_var = tk.StringVar(self.results_win)
-            self.results_win.title("Query results")
-            self.results = tk.Label(self.results_win, textvariable=self.results_var)
+            results = self.db.search_query(self.item_list, self.item_name_entry.get(), self.item_number_entry.get(), self.item_category_entry.get(), self.item_quantity_entry.get(), self.item_location_entry.get())
+            results_win = tk.Toplevel(self.item_win)
+            results_win.geometry("200x200")
+            results_win.title("Query results")
+            results_display = tk.Label(results_win, text=results)
 
         self.item_name_descriptor = tk.Label(self.item_win,text="Name: ")
         self.item_number_descriptor = tk.Label(self.item_win, text="Item#")
