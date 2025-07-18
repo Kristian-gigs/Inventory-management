@@ -32,21 +32,21 @@ class Database:
                 if not first:
                     query += " and "
                     
-                query += f" and quantity == '{count}'"
+                query += f"quantity == '{count}'"
                 first = False
             
             if cat != "":
                 if not first:
                     query += " and "
                     
-                query += f" and category == '{cat}'"
+                query += f"category == '{cat}'"
                 first = False
             
             if location != "":
                 if not first:
                     query += " and "
                     
-                query += f" and location == '{location}'"
+                query += f"location == '{location}'"
                 first = False
             
 
