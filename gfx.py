@@ -29,6 +29,12 @@ class Graphics:
         self.item_quantity_entry = tk.StringVar()
         self.item_location_entry = tk.StringVar()
 
+        def clear():
+            self.item_name_entry.set("") 
+            self.item_number_entry.set("")
+            self.item_category_entry.set("")
+            self.item_quantity_entry.set("")
+            self.item_location_entry.set("")
         self.item_win = tk.Toplevel()
         self.item_name = tk.Entry(self.item_win, textvariable=self.item_name_entry)
         self.item_number = tk.Entry(self.item_win, textvariable=self.item_number_entry)
@@ -42,6 +48,7 @@ class Graphics:
         self.item_quantity_descriptor = tk.Label(self.item_win, text="Qty: ")
         self.item_location_descriptor = tk.Label(self.item_win, text="Loc:")
         self.add_button = tk.Button(self.item_win, text="Add item", command=lambda: self.db.add_item(self.item_name_entry.get(), self.item_number_entry.get(), self.item_category_entry.get(), self.item_quantity_entry.get(), self.item_location_entry.get()))
+        self.clear_button = tk.Button(self.item_win, text="Clear", command=clear)
 
         self.item_name.grid(column=2, row=1)
         self.item_number.grid(column=2, row=2)
@@ -49,6 +56,7 @@ class Graphics:
         self.item_quantity.grid(column=2, row=4)
         self.item_location.grid(column=2, row=5)
         self.add_button.grid(column=2, row=6)
+        self.clear_button.grid(column=1, row=6)
 
         self.item_name_descriptor.grid(column=1, row=1)
         self.item_number_descriptor.grid(column=1, row=2)
@@ -66,6 +74,13 @@ class Graphics:
         self.item_quantity_entry = tk.StringVar()
         self.item_location_entry = tk.StringVar()
 
+        def clear():
+            self.item_name_entry.set("") 
+            self.item_number_entry.set("")
+            self.item_category_entry.set("")
+            self.item_quantity_entry.set("")
+            self.item_location_entry.set("")
+
         self.item_win = tk.Toplevel()
         self.item_name = tk.Entry(self.item_win, textvariable=self.item_name_entry)
         self.item_number = tk.Entry(self.item_win, textvariable=self.item_number_entry)
@@ -79,16 +94,20 @@ class Graphics:
         self.item_category_descriptor = tk.Label(self.item_win, text="Cat: ")
         self.item_quantity_descriptor = tk.Label(self.item_win, text="Qty: ")
         self.item_location_descriptor = tk.Label(self.item_win, text="Loc:")
-        self.search_button = tk.Button(self.item_win, command=lambda: self.db.search_query(self.item_list, self.item_name_entry.get(), self.item_number_entry.get(), self.item_category_entry.get(), self.item_quantity_entry.get(), self.item_location_entry.get()))
+        self.search_button = tk.Button(self.item_win, text="Search", command=lambda: self.db.search_query(self.item_list, self.item_name_entry.get(), self.item_number_entry.get(), self.item_category_entry.get(), self.item_quantity_entry.get(), self.item_location_entry.get()))
         self.next_button = tk.Button(self.item_win, command=None, text=">")
         self.prev_button = tk.Button(self.item_win, command=None, text="<")
+        self.clear_button = tk.Button(self.item_win, text="Clear", command=clear)
 
         self.item_name.grid(column=2, row=1)
         self.item_number.grid(column=2, row=2)
         self.item_category.grid(column=2, row=3)
         self.item_quantity.grid(column=2, row=4)
         self.item_location.grid(column=2, row=5)
-        self.search_button.grid(column=2, row=6)
+        self.search_button.grid(column=3, row=6)
+        self.prev_button.grid(column=2, row=6)
+        self.next_button.grid(column=4, row=6)
+        self.clear_button.grid(column=1, row=6)
 
         self.item_name_descriptor.grid(column=1, row=1)
         self.item_number_descriptor.grid(column=1, row=2)
