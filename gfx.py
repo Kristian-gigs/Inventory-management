@@ -28,7 +28,6 @@ class Graphics:
         self.item_quantity_entry = tk.StringVar()
         self.item_location_entry = tk.StringVar()
 
-        self.wnd.bind('<Return>', lambda: self.db.add_item(self.item_name_entry.get(), self.item_number_entry.get(), self.item_category_entry.get(), self.item_quantity_entry.get(), self.item_location_entry.get()))
 
         def clear():
             self.item_name_entry.set("") 
@@ -37,6 +36,8 @@ class Graphics:
             self.item_quantity_entry.set("")
             self.item_location_entry.set("")
         self.item_win = tk.Toplevel()
+        self.item_win.bind('<Return>', lambda event: self.db.add_item(self.item_name_entry.get(), self.item_number_entry.get(), self.item_category_entry.get(), self.item_quantity_entry.get(), self.item_location_entry.get()))
+
         self.item_name = tk.Entry(self.item_win, textvariable=self.item_name_entry)
         self.item_number = tk.Entry(self.item_win, textvariable=self.item_number_entry)
         self.item_category = tk.Entry(self.item_win, textvariable=self.item_category_entry)
@@ -67,7 +68,6 @@ class Graphics:
 
     
     def search_btn_cmd(self):
-        self.wnd.bind('<Return>', search)
         self.item_list = []
 
         self.item_name_entry = tk.StringVar()
@@ -90,7 +90,7 @@ class Graphics:
         self.item_quantity = tk.Entry(self.item_win, textvariable=self.item_quantity_entry)
         self.item_location = tk.Entry(self.item_win, textvariable=self.item_location_entry)
 
-        def search():
+        def search(event=None):
             results = self.db.search_query( self.item_name_entry.get(), self.item_number_entry.get(), self.item_category_entry.get(), self.item_quantity_entry.get(), self.item_location_entry.get())
             results_win = tk.Toplevel(self.item_win)
             results_win.geometry("400x200")
@@ -98,6 +98,7 @@ class Graphics:
             results_display = tk.Label(results_win, text=str(results))
             results_display.grid()
             print(results)
+        self.item_win.bind('<Return>', search)
 
         self.item_name_descriptor = tk.Label(self.item_win,text="Name: ")
         self.item_number_descriptor = tk.Label(self.item_win, text="Item#")
