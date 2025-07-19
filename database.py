@@ -7,51 +7,74 @@ class Database:
         self.db_source = db_source
         
     
-    def add_item(self, item_name, item_no, count, cat, location):
+    def add_item(self, item_name, item_no, cat, count, location):
         new_row = pd.DataFrame([[item_name, item_no, cat, count, location]])
         new_row.to_csv(self.db_source, mode='a', index=False, header=False)
     
     def search_query(self, item_name, item_no, cat, count, location):
         with open(self.db_source) as csv_file:
-            data = pd.read_csv(csv_file)
+            data = pd.read_csv(csv_file, quotechar="'")
             query = f""
             first = True
 
-            if item_name != "":
-                query += f"item_name == '{item_name}'"
-                first = False
+            # if item_name != "":
+            #     query += f"item_name == '{item_name}'"
+            #     first = False
             
-            if item_no != "":
-                if not first:
-                    query += " & "
+            # if item_no != "":
+            #     if not first:
+            #         query += " & "
 
-                query += f"item_no == '{item_no}'"
-                first = False
+            #     query += f"item_no == '{item_no}'"
+            #     first = False
             
-            if cat != "":
-                if not first:
-                    query += " & "
+            # if cat != "":
+            #     if not first:
+            #         query += " & "
                     
-                query += f"category == '{cat}'"
-                first = False
+            #     query += f"category == '{cat}'"
+            #     first = False
             
-            if count != "":
-                if not first:
-                    query += " & "
+            # if count != "":
+            #     if not first:
+            #         query += " & "
                     
-                query += f"quantity == '{count}'"
-                first = False
+            #     query += f"quantity == '{count}'"
+            #     first = False
 
-            if location != "":
-                if not first:
-                    query += " & "
+            # if location != "":
+            #     if not first:
+            #         query += " & "
                     
-                query += f"location == '{location}'"
-                first = False
+                # query += f"location == '{location}'"
+                # first = False
             
 
-            item_list = data.query(query)
-            return item_list
+            # item_list = data.query(query)
+
+            # item_list = data[
+            #     (data['item_name'].str.contains(item_name))
+            #     (data["item_no"].str.contains(item_no)) &
+            #     (data["category"].str.contains(cat)) &
+            #     (data["quantity"].str.contains(count)) &
+            #     (data["location"].str.contains(location))
+            # ]
+            # return item_list
+            print("Available categories:", data["category"].unique())
+            print(data[data["category"] == "1"])
+            print(data)
+            if item_name:
+                data = data[data["item_name"].astype(str).str.contains(item_name, case=False, na=False)]
+            if item_no:
+                data = data[data["item_no"].astype(str).str.contains(item_no, case=False, na=False)]
+            if cat:
+                data = data[data["category"].astype(str).str.contains(cat, case=False, na=False)]
+            if count:
+                data = data[data["quantity"].astype(str).str.contains(count, case=False, na=False)]
+            if location:
+                data = data[data["location"].astype(str).str.contains(location, case=False, na=False)]
+
+            return data
     
     def edit_item(self):
         pass
