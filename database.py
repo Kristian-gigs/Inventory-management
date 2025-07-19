@@ -16,10 +16,7 @@ class Database:
             data = pd.read_csv(csv_file, quotechar="'")
             query = f""
             first = True
-
-            print("Available categories:", data["category"].unique())
-            print(data[data["category"] == "1"])
-            print(data)
+            
             if item_name:
                 data = data[data["item_name"].astype(str).str.contains(item_name, case=False, na=False)]
             if item_no:
