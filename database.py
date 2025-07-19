@@ -30,5 +30,9 @@ class Database:
 
             return data
     
-    def edit_item(self):
-        pass
+    def edit_item(self, old_data: list, new_data: list):
+        data = pd.read_csv(self.db_source).fillna("").astype(str).map(str.strip)
+        row_mask = (data == old_data).all(axis=1)
+        data.loc[row_mask] = new_data
+        data.to_csv(self.db_source, index=False)
+        return data
