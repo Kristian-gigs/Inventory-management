@@ -90,7 +90,7 @@ class Graphics:
         def search():
             results = self.db.search_query( self.item_name_entry.get(), self.item_number_entry.get(), self.item_category_entry.get(), self.item_quantity_entry.get(), self.item_location_entry.get())
             results_win = tk.Toplevel(self.item_win)
-            results_win.geometry("200x200")
+            results_win.geometry("400x200")
             results_win.title("Query results")
             results_display = tk.Label(results_win, text=str(results))
             results_display.grid()

@@ -11,7 +11,7 @@ class Database:
         new_row = pd.DataFrame([[item_name, item_no, cat, count, location]])
         new_row.to_csv(self.db_source, mode='a', index=False, header=False)
     
-    def search_query(self, item_name, item_no, count, cat, location):
+    def search_query(self, item_name, item_no, cat, count, location):
         with open(self.db_source) as csv_file:
             data = pd.read_csv(csv_file)
             query = f""
@@ -23,28 +23,28 @@ class Database:
             
             if item_no != "":
                 if not first:
-                    query += " and "
+                    query += " & "
 
                 query += f"item_no == '{item_no}'"
                 first = False
             
-            if count != "":
-                if not first:
-                    query += " and "
-                    
-                query += f"quantity == '{count}'"
-                first = False
-            
             if cat != "":
                 if not first:
-                    query += " and "
+                    query += " & "
                     
                 query += f"category == '{cat}'"
                 first = False
             
+            if count != "":
+                if not first:
+                    query += " & "
+                    
+                query += f"quantity == '{count}'"
+                first = False
+
             if location != "":
                 if not first:
-                    query += " and "
+                    query += " & "
                     
                 query += f"location == '{location}'"
                 first = False
