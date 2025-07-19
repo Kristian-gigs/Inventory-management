@@ -17,49 +17,6 @@ class Database:
             query = f""
             first = True
 
-            # if item_name != "":
-            #     query += f"item_name == '{item_name}'"
-            #     first = False
-            
-            # if item_no != "":
-            #     if not first:
-            #         query += " & "
-
-            #     query += f"item_no == '{item_no}'"
-            #     first = False
-            
-            # if cat != "":
-            #     if not first:
-            #         query += " & "
-                    
-            #     query += f"category == '{cat}'"
-            #     first = False
-            
-            # if count != "":
-            #     if not first:
-            #         query += " & "
-                    
-            #     query += f"quantity == '{count}'"
-            #     first = False
-
-            # if location != "":
-            #     if not first:
-            #         query += " & "
-                    
-                # query += f"location == '{location}'"
-                # first = False
-            
-
-            # item_list = data.query(query)
-
-            # item_list = data[
-            #     (data['item_name'].str.contains(item_name))
-            #     (data["item_no"].str.contains(item_no)) &
-            #     (data["category"].str.contains(cat)) &
-            #     (data["quantity"].str.contains(count)) &
-            #     (data["location"].str.contains(location))
-            # ]
-            # return item_list
             print("Available categories:", data["category"].unique())
             print(data[data["category"] == "1"])
             print(data)
