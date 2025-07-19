@@ -28,6 +28,8 @@ class Graphics:
         self.item_quantity_entry = tk.StringVar()
         self.item_location_entry = tk.StringVar()
 
+        self.wnd.bind('<Return>', lambda: self.db.add_item(self.item_name_entry.get(), self.item_number_entry.get(), self.item_category_entry.get(), self.item_quantity_entry.get(), self.item_location_entry.get()))
+
         def clear():
             self.item_name_entry.set("") 
             self.item_number_entry.set("")
