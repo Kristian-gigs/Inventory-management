@@ -65,6 +65,7 @@ class Graphics:
 
     
     def search_btn_cmd(self):
+        self.wnd.bind('<Return>', search)
         self.item_list = []
 
         self.item_name_entry = tk.StringVar()
