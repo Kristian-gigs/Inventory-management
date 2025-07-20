@@ -1,11 +1,11 @@
 import tkinter as tk
+from tkinter import ttk
 import database
 class Graphics:
     def __init__(self, db):
-        self.item_count = 0
         self.wnd = tk.Tk()
         self.wnd.title("Inventory management")
-        self.main_menu = tk.Menu(self.wnd)
+       
         
         self.query_frame = tk.Frame(self.wnd)
         self.query_frame.grid()
@@ -66,7 +66,60 @@ class Graphics:
         self.item_quantity_descriptor.grid(column=1, row=4)
         self.item_location_descriptor.grid(column=1, row=5)
 
-    
+    def edit_selected(self, row: ttk.Treeview):
+
+        if not row:
+            print("No row selected!")
+            return 0
+        self.edit_win = tk.Toplevel(self.wnd)
+        self.edit_win.title("Edit values")
+
+        row_data = self.tree.item(row[0])["values"]
+        self.item_name_entry = tk.StringVar()
+        self.item_number_entry = tk.StringVar()
+        self.item_category_entry = tk.StringVar()
+        self.item_quantity_entry = tk.StringVar()
+        self.item_location_entry = tk.StringVar()
+
+        if str(row_data[0]).lower != "nan":
+            self.item_name_entry.set(row_data[0])
+        if str(row_data[1]).lower != "nan":
+            self.item_number_entry.set(row_data[1])
+        if str(row_data[2]).lower != "nan":
+            self.item_category_entry.set(row_data[2])
+        if str(row_data[3]).lower != "nan":
+            self.item_quantity_entry.set(row_data[3])
+        if str(row_data[4]).lower != "nan":
+            self.item_location_entry.set(row_data[4])
+
+        self.edit_win.bind('<Return>', lambda event: self.db.edit_item(database.pd.DataFrame([row_data], columns=["item_name","item_no","category","quantity","location"]), (self.item_name_entry.get(), self.item_number_entry.get(), self.item_category_entry.get(), self.item_quantity_entry.get(), self.item_location_entry.get())))
+
+        self.item_name = tk.Entry(self.edit_win, textvariable=self.item_name_entry)
+        self.item_number = tk.Entry(self.edit_win, textvariable=self.item_number_entry)
+        self.item_category = tk.Entry(self.edit_win, textvariable=self.item_category_entry)
+        self.item_quantity = tk.Entry(self.edit_win, textvariable=self.item_quantity_entry)
+        self.item_location = tk.Entry(self.edit_win, textvariable=self.item_location_entry)
+            
+        self.item_name_descriptor = tk.Label(self.edit_win,text="Name: ")
+        self.item_number_descriptor = tk.Label(self.edit_win, text="Item#")
+        self.item_category_descriptor = tk.Label(self.edit_win, text="Cat: ")
+        self.item_quantity_descriptor = tk.Label(self.edit_win, text="Qty: ")
+        self.item_location_descriptor = tk.Label(self.edit_win, text="Loc:")
+        self.apply_button = tk.Button(self.edit_win, text="Apply", command=lambda: self.db.edit_item(row_data, (self.item_name_entry.get(), self.item_number_entry.get(), self.item_category_entry.get(), self.item_quantity_entry.get(), self.item_location_entry.get())))
+
+        self.item_name.grid(column=2, row=1)
+        self.item_number.grid(column=2, row=2)
+        self.item_category.grid(column=2, row=3)
+        self.item_quantity.grid(column=2, row=4)
+        self.item_location.grid(column=2, row=5)
+        self.apply_button.grid(column=2, row=6)
+
+        self.item_name_descriptor.grid(column=1, row=1)
+        self.item_number_descriptor.grid(column=1, row=2)
+        self.item_category_descriptor.grid(column=1, row=3)
+        self.item_quantity_descriptor.grid(column=1, row=4)
+        self.item_location_descriptor.grid(column=1, row=5)
+
     def search_btn_cmd(self):
         self.item_list = []
 
@@ -93,10 +146,30 @@ class Graphics:
         def search(event=None):
             results = self.db.search_query( self.item_name_entry.get(), self.item_number_entry.get(), self.item_category_entry.get(), self.item_quantity_entry.get(), self.item_location_entry.get())
             results_win = tk.Toplevel(self.item_win)
-            results_win.geometry("400x200")
             results_win.title("Query results")
-            results_display = tk.Label(results_win, text=str(results))
-            results_display.grid()
+
+             # Destroy old tree if exists
+            if hasattr(self, "tree"):
+                self.tree.destroy()
+
+            self.tree = ttk.Treeview(results_win)
+            self.tree["columns"] = list(results.columns)
+            self.tree["show"] = "headings"
+
+            # Set headings
+            for col in results.columns:
+                self.tree.heading(col, text=col)
+                self.tree.column(col, width=100)
+
+            # Insert rows
+            for _, row in results.iterrows():
+                self.tree.insert("", "end", values=list(row))
+
+            self.tree.grid(row=4, column=0, columnspan=5, pady=10)
+            # Add edit button
+            self.edit_btn = tk.Button(results_win, text="Edit Selected", command=lambda: self.edit_selected(self.tree.selection()))
+            self.edit_btn.grid(row=5, column=0, pady=5)
+
             print(results)
         self.item_win.bind('<Return>', search)
 
