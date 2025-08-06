@@ -81,15 +81,15 @@ class Graphics:
         self.item_quantity_entry = tk.StringVar()
         self.item_location_entry = tk.StringVar()
 
-        if str(row_data[0]).lower != "nan":
+        if str(row_data[0]).lower() != "nan":
             self.item_name_entry.set(row_data[0])
-        if str(row_data[1]).lower != "nan":
+        if str(row_data[1]).lower() != "nan":
             self.item_number_entry.set(row_data[1])
-        if str(row_data[2]).lower != "nan":
+        if str(row_data[2]).lower() != "nan":
             self.item_category_entry.set(row_data[2])
-        if str(row_data[3]).lower != "nan":
+        if str(row_data[3]).lower() != "nan":
             self.item_quantity_entry.set(row_data[3])
-        if str(row_data[4]).lower != "nan":
+        if str(row_data[4]).lower() != "nan":
             self.item_location_entry.set(row_data[4])
 
         self.edit_win.bind('<Return>', lambda event: self.db.edit_item(database.pd.DataFrame([row_data], columns=["item_name","item_no","category","quantity","location"]), (self.item_name_entry.get(), self.item_number_entry.get(), self.item_category_entry.get(), self.item_quantity_entry.get(), self.item_location_entry.get())))
@@ -105,7 +105,7 @@ class Graphics:
         self.item_category_descriptor = tk.Label(self.edit_win, text="Cat: ")
         self.item_quantity_descriptor = tk.Label(self.edit_win, text="Qty: ")
         self.item_location_descriptor = tk.Label(self.edit_win, text="Loc:")
-        self.apply_button = tk.Button(self.edit_win, text="Apply", command=lambda: self.db.edit_item(row_data, (self.item_name_entry.get(), self.item_number_entry.get(), self.item_category_entry.get(), self.item_quantity_entry.get(), self.item_location_entry.get())))
+        self.apply_button = tk.Button(self.edit_win, text="Apply", command=lambda: self.db.edit_item(row_data, (self.item_name_entry.get(), self.item_number_entry.get(), self.item_category_entry.get(), int(self.item_quantity_entry.get()), self.item_location_entry.get())))
 
         self.item_name.grid(column=2, row=1)
         self.item_number.grid(column=2, row=2)
