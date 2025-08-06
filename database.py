@@ -35,4 +35,8 @@ class Database:
         row_mask = (data == old_data).all(axis=1)
         data.loc[row_mask] = new_data
         data.to_csv(self.db_source, index=False)
+
+        print(old_data)
+        print(new_data, "\n\n\n")
+        print(data)
         return data
