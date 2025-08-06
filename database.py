@@ -30,7 +30,7 @@ class Database:
 
             return data
     
-    def edit_item(self, old_data, new_data: list):
+    def edit_item(self, exit_apply_wnd, old_data, new_data: list):
         
         data = pd.read_csv(self.db_source).fillna("").astype(str).map(str.strip)
         
@@ -40,7 +40,7 @@ class Database:
         # For debugging errors in replacing rows. Compares each row of the dataframe to the
         # selected data, and checks for matches. This tells you if there are any unintended matches,
         # and also if the intended row is selected at all.
-        
+
                 # print("\n\n", "Columns:", list(data.columns))
                 # print("Old data:", old_data)
                 # print("Length match:", len(data.columns) == len(old_data), "\n\n")
@@ -50,10 +50,7 @@ class Database:
 
         row_mask = (data == old_data).all(axis=1)
         data.loc[row_mask] = new_data
-        print(data, "\n\n\n")
         data.to_csv(self.db_source, index=False)
 
-        print(old_data)
-        print(new_data, "\n\n\n")
-        print(data)
+        exit_apply_wnd()
         return data
