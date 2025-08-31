@@ -38,7 +38,8 @@ class Graphics:
         self.item_win = tk.Toplevel()
         self.item_win.bind('<Return>', lambda event: self.db.add_item(self.item_name_entry.get(), self.item_number_entry.get(), self.item_category_entry.get(), self.item_quantity_entry.get(), self.item_location_entry.get()))
         self.item_win.bind("<Escape>", lambda event: self.item_win.destroy())
-        
+        self.item_win.grab_set()
+
         self.item_name = tk.Entry(self.item_win, textvariable=self.item_name_entry)
         self.item_number = tk.Entry(self.item_win, textvariable=self.item_number_entry)
         self.item_category = tk.Entry(self.item_win, textvariable=self.item_category_entry)
@@ -74,6 +75,8 @@ class Graphics:
             return 0
         self.edit_win = tk.Toplevel(self.wnd)
         self.edit_win.title("Edit values")
+        self.edit_win.grab_set()
+
 
         row_data = self.tree.item(row[0])["values"]
         self.item_name_entry = tk.StringVar()
@@ -137,6 +140,7 @@ class Graphics:
             self.item_location_entry.set("")
 
         self.item_win = tk.Toplevel()
+        self.item_win.grab_set()
         self.item_name = tk.Entry(self.item_win, textvariable=self.item_name_entry)
         self.item_number = tk.Entry(self.item_win, textvariable=self.item_number_entry)
         self.item_category = tk.Entry(self.item_win, textvariable=self.item_category_entry)
@@ -148,6 +152,7 @@ class Graphics:
             results_win = tk.Toplevel(self.item_win)
             results_win.bind("<Escape>", lambda event: results_win.destroy())
             results_win.title("Query results")
+            results_win.grab_set()
 
              # Destroy old tree if exists
             if hasattr(self, "tree"):
@@ -206,18 +211,10 @@ class Graphics:
         credits_wnd = tk.Toplevel(self.wnd)
         credits_wnd.geometry("500x100")
         credits_wnd.title("Credits")
+        credits_wnd.grab_set()
         credits_wnd.bind("<Escape>", lambda event: credits_wnd.destroy())
         credit_text = tk.Label(credits_wnd, text="This inventory management system was created by Kristian Gunnleiv i Gardastovu Sørensen\nIt aims to help one keep track of their inventory using a simple GUI,\n and was all in all just a fun little project\n\n Github: @Kristian-gigs\n Check out other things I have made!")
         credit_text.pack()
-
-    def update_table(self):
-        pass
-    
-    def clear_table(self):
-        pass
-
-    def send_query(self, gfx):
-        pass
     
     def error_handle(self):
         print("Error occured")
