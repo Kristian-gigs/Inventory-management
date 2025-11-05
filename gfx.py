@@ -76,15 +76,16 @@ class Graphics:
         self.edit_win = tk.Toplevel(self.wnd)
         self.edit_win.title("Edit values")
         self.edit_win.grab_set()
-
-
+    
+        self.add_qty = 0
         row_data = self.tree.item(row[0])["values"]
         self.item_name_entry = tk.StringVar()
         self.item_number_entry = tk.StringVar()
         self.item_category_entry = tk.StringVar()
         self.item_quantity_entry = tk.StringVar()
         self.item_location_entry = tk.StringVar()
-
+        self.item_add_qty_var = tk.StringVar(value="1")
+        
         if str(row_data[0]).lower() != "nan":
             self.item_name_entry.set(row_data[0])
         if str(row_data[1]).lower() != "nan":
@@ -102,6 +103,16 @@ class Graphics:
         self.item_number = tk.Entry(self.edit_win, textvariable=self.item_number_entry)
         self.item_category = tk.Entry(self.edit_win, textvariable=self.item_category_entry)
         self.item_quantity = tk.Entry(self.edit_win, textvariable=self.item_quantity_entry)
+        
+        def add_qty_plus():
+            self.add_qty += int(self.item_add_qty_var.get())
+        
+        def add_qty_minus():
+            self.add_qty -= int(self.item_add_qty_var.get())
+            
+        self.item_add_qty = tk.Entry(self.edit_win, textvariable=self.item_add_qty_var)
+        self.item_add_plus = tk.Button(self.edit_win, text="+", command=add_qty_plus)
+        self.item_add_minus = tk.Button(self.edit_win, text="-", command=add_qty_minus)
         self.item_location = tk.Entry(self.edit_win, textvariable=self.item_location_entry)
             
         self.item_name_descriptor = tk.Label(self.edit_win,text="Name: ")
@@ -109,7 +120,7 @@ class Graphics:
         self.item_category_descriptor = tk.Label(self.edit_win, text="Cat: ")
         self.item_quantity_descriptor = tk.Label(self.edit_win, text="Qty: ")
         self.item_location_descriptor = tk.Label(self.edit_win, text="Loc:")
-        self.apply_button = tk.Button(self.edit_win, text="Apply", command=lambda: self.db.edit_item(self.edit_win.destroy, row_data, (self.item_name_entry.get(), self.item_number_entry.get(), self.item_category_entry.get(), int(self.item_quantity_entry.get()), self.item_location_entry.get())))
+        self.apply_button = tk.Button(self.edit_win, text="Apply", command=lambda: self.db.edit_item(self.edit_win.destroy, row_data, (self.item_name_entry.get(), str(int(self.item_number_entry.get()) + self.add_qty), self.item_category_entry.get(), int(self.item_quantity_entry.get()), self.item_location_entry.get())))
         self.item_name.grid(column=2, row=1)
         self.item_number.grid(column=2, row=2)
         self.item_category.grid(column=2, row=3)
@@ -122,6 +133,9 @@ class Graphics:
         self.item_category_descriptor.grid(column=1, row=3)
         self.item_quantity_descriptor.grid(column=1, row=4)
         self.item_location_descriptor.grid(column=1, row=5)
+        self.item_add_qty.grid(column=4, row=4)
+        self.item_add_plus.grid(column=5, row=4)
+        self.item_add_minus.grid(column=3, row=4)
 
     def search_btn_cmd(self):
         self.item_list = []
